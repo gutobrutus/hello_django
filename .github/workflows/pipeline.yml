@@ -60,7 +60,7 @@ jobs:
           name: trivy-report
           path: report.html
   
-  deploy-on-k8s:
+  deploy-k8s:
     runs-on: 'ubuntu-latest'
     needs: [build-and-push, scan-vuln-with-trivy]
     steps:
@@ -87,10 +87,10 @@ jobs:
           helm upgrade --install --atomic --timeout 1m hello-django \
           helm/charts/hello-django \
           --namespace pipeline --create-namespace \
-          --set settingsPy.secretKey=${{ secrets.SECRET_KEY_DJANGO }} \
+          --set settingsPy.secretKey='${{ secrets.SECRET_KEY_DJANGO }}' \
           --set settingsPy.debug=False \
-          --set settingsPy.databaseUser=${{ secrets.DB_USER }} \
-          --set settingsPy.databasePassword=${{ secrets.DB_PASS }} \
-          --set settingsPy.databaseHost=${{ vars.DB_HOST }} \
-          --set settingsPy.databasePort=${{ vars.DB_PORT }} \
+          --set settingsPy.databaseUser='${{ secrets.DB_USER }}' \
+          --set settingsPy.databasePassword='${{ secrets.DB_PASS }}' \
+          --set settingsPy.databaseHost='${{ vars.DB_HOST }}' \
+          --set settingsPy.databasePort='${{ vars.DB_PORT }}' \
           --set image.tag=${{ github.sha }} --dry-run
