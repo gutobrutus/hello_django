@@ -32,5 +32,5 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            "${{ vars.REGISTRY }}/${{ vars.IMAGE }}:$(date +%s)"
+            "${{ vars.REGISTRY }}/${{ vars.IMAGE }}:${{ github.sha}}"
             "${{ vars.REGISTRY }}/${{ vars.IMAGE }}:latest"
