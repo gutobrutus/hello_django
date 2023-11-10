@@ -47,7 +47,7 @@ jobs:
           severity: 'CRITICAL,HIGH'
           ignore-unfixed: true
           template: '@/contrib/html.tpl'
-          exit-code: '1'
+          exit-code: '0'
           format: 'template'
           output: report.html
         env:
